@@ -2,7 +2,7 @@ servers=[
 {
   :hostname => "master",
   :ip => "192.168.100.10",
-  :box => "hashicorp/precise64",
+  :box => "ubuntu/xenial64",
   :ram => 512,
   :cpu => 1,
   :provisions => [".bootstrap/master.sh"]
@@ -10,54 +10,54 @@ servers=[
 {
   :hostname => "slave1",
   :ip => "192.168.100.11",
-  :box => "hashicorp/precise64",
+  :box => "bento/centos-7.4",
   :ram => 512,
   :cpu => 1,
   :provisions => [".bootstrap/slave.sh"]
-}
+},
 {
   :hostname => "slave2",
   :ip => "192.168.100.12",
-  :box => "hashicorp/precise64",
+  :box => "bento/centos-7.4",
   :ram => 512,
   :cpu => 1,
   :provisions => [".bootstrap/slave.sh"]
-}
+},
 {
   :hostname => "monitoring",
   :ip => "192.168.100.13",
-  :box => "hashicorp/precise64",
+  :box => "ubuntu/xenial64",
   :ram => 512,
   :cpu => 1,
   :provisions => [".bootstrap/montiroing.sh"]
-}
+},
 {
   :hostname => "serveragent1",
   :ip => "192.168.100.14",
-  :box => "hashicorp/precise64",
+  :box => "ubuntu/xenial64",
   :ram => 512,
   :cpu => 1,
   :provisions => [".bootstrap/serveragent.sh"]
-}
+},
 {
   :hostname => "serveragent2",
   :ip => "192.168.100.15",
-  :box => "hashicorp/precise64",
+  :box => "ubuntu/xenial64",
   :ram => 512,
   :cpu => 1,
   :provisions => [".bootstrap/serveragent.sh"]
-}
+},
 {
   :hostname => "serveragent3",
   :ip => "192.168.100.16",
-  :box => "hashicorp/precise64",
+  :box => "ubuntu/xenial64",
   :ram => 512,
   :cpu => 1,
   :provisions => [".bootstrap/serveragent.sh"]
 }
 ]
 
-Vagrant.configure(6) do |config|
+Vagrant.configure("2") do |config|
   servers.each do |machine|
     config.vm.define machine[:hostname] do |node|
         machine [:provisions].each do |script|
