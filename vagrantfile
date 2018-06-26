@@ -5,7 +5,7 @@ servers=[
   :box => "hashicorp/precise64",
   :ram => 512,
   :cpu => 1,
-  :provisions => [".bootstrap/bootstrap.sh"]
+  :provisions => [".bootstrap/master.sh"]
 },
 {
   :hostname => "slave1",
@@ -13,7 +13,7 @@ servers=[
   :box => "hashicorp/precise64",
   :ram => 512,
   :cpu => 1,
-  :provisions => [".bootstrap/bootstrap1.sh"]
+  :provisions => [".bootstrap/slave.sh"]
 }
 {
   :hostname => "slave2",
@@ -21,31 +21,39 @@ servers=[
   :box => "hashicorp/precise64",
   :ram => 512,
   :cpu => 1,
-  :provisions => [".bootstrap/bootstrap1.sh"]
+  :provisions => [".bootstrap/slave.sh"]
 }
 {
-  :hostname => "server1",
+  :hostname => "monitoring",
   :ip => "192.168.100.13",
   :box => "hashicorp/precise64",
   :ram => 512,
   :cpu => 1,
-  :provisions => [".bootstrap/bootstrap1.sh"]
+  :provisions => [".bootstrap/montiroing.sh"]
 }
 {
-  :hostname => "server2",
+  :hostname => "serveragent1",
   :ip => "192.168.100.14",
   :box => "hashicorp/precise64",
   :ram => 512,
   :cpu => 1,
-  :provisions => [".bootstrap/bootstrap1.sh"]
+  :provisions => [".bootstrap/serveragent.sh"]
 }
 {
-  :hostname => "server3",
-  :ip => "192.168.100.14",
+  :hostname => "serveragent2",
+  :ip => "192.168.100.15",
   :box => "hashicorp/precise64",
   :ram => 512,
   :cpu => 1,
-  :provisions => [".bootstrap/bootstrap1.sh"]
+  :provisions => [".bootstrap/serveragent.sh"]
+}
+{
+  :hostname => "serveragent3",
+  :ip => "192.168.100.16",
+  :box => "hashicorp/precise64",
+  :ram => 512,
+  :cpu => 1,
+  :provisions => [".bootstrap/serveragent.sh"]
 }
 ]
 
