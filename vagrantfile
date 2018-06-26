@@ -1,0 +1,67 @@
+servers=[
+{
+  :hostname => "master",
+  :ip => "192.168.100.10",
+  :box => "hashicorp/precise64",
+  :ram => 512,
+  :cpu => 1,
+  :provisions => [".bootstrap/bootstrap.sh"]
+},
+{
+  :hostname => "slave1",
+  :ip => "192.168.100.11",
+  :box => "hashicorp/precise64",
+  :ram => 512,
+  :cpu => 1,
+  :provisions => [".bootstrap/bootstrap1.sh"]
+}
+{
+  :hostname => "slave2",
+  :ip => "192.168.100.12",
+  :box => "hashicorp/precise64",
+  :ram => 512,
+  :cpu => 1,
+  :provisions => [".bootstrap/bootstrap1.sh"]
+}
+{
+  :hostname => "server1",
+  :ip => "192.168.100.13",
+  :box => "hashicorp/precise64",
+  :ram => 512,
+  :cpu => 1,
+  :provisions => [".bootstrap/bootstrap1.sh"]
+}
+{
+  :hostname => "server2",
+  :ip => "192.168.100.14",
+  :box => "hashicorp/precise64",
+  :ram => 512,
+  :cpu => 1,
+  :provisions => [".bootstrap/bootstrap1.sh"]
+}
+{
+  :hostname => "server3",
+  :ip => "192.168.100.14",
+  :box => "hashicorp/precise64",
+  :ram => 512,
+  :cpu => 1,
+  :provisions => [".bootstrap/bootstrap1.sh"]
+}
+]
+
+Vagrant.configure(6) do |config|
+  servers.each do |machine|
+    config.vm.define machine[:hostname] do |node|
+        machine [:provisions].each do |script|
+           node.vm.provision :shell, :path => script
+        end
+      node.vm.box = machine[:box]
+      node.vm.hostname = machine[:hostname]
+      node.vm.network "private_network", ip: machine[:ip]
+      node.vm.provider "virtualbox" do |vb|
+        vb.memory = machine[:ram]
+        vb.cpus = machine[:cpu]
+      end
+    end
+  end
+end
